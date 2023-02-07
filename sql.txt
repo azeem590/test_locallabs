@@ -1,5 +1,16 @@
-SELECT product_name, product_img_url, product_url, product_price_min, product_short_description from grommet_products where id in(select product_id from grommet_product_categories gpc inner join grommet_gifts_categories ggc on ggc.id = gpc.product_category_id where ggc.sub_category = 'Jewelry' and is_sold_out = 0);
+SELECT product_name, product_img_url, product_url, product_price_min, product_short_description from grommet_products
+ where id in
+ (select product_id from grommet_product_categories gpc inner join grommet_gifts_categories ggc
+  on ggc.id = gpc.product_category_id where ggc.sub_category = 'Jewelry' and is_sold_out = 0);
 
-select product_name,product_img_url,product_url,product_price_min,product_short_description from grommet_products where id in(select product_id from grommet_product_to_keyword gptk join grommet_product_keywords gpk on gpk.id = gptk.keyword_id where gpk.keyword = 'Hair accessor' and is_sold_out = 0);
+select product_name,product_img_url,product_url,product_price_min,product_short_description from grommet_products
+ where id in
+ (select product_id from grommet_product_to_keyword gptk join grommet_product_keywords gpk
+  on gpk.id = gptk.keyword_id where gpk.keyword = 'Hair accessor' and is_sold_out = 0);
 
-SELECT product_name, product_img_url, product_url, product_price_min, product_short_description from grommet_products where id in((select product_id from grommet_product_categories gpc inner join grommet_gifts_categories ggc on ggc.id = gpc.product_category_id where ggc.sub_category = 'Beauty & Personal Care' or ggc.sub_category = 'Skincare' and is_sold_out = 0) UNION (select product_id from grommet_product_to_keyword gptk join grommet_product_keywords gpk on gpk.id = gptk.keyword_id where gpk.keyword='Aromatherapy' and is_sold_out = 0));
+SELECT product_name, product_img_url, product_url, product_price_min, product_short_description from grommet_products
+ where id in
+ ((select product_id from grommet_product_categories gpc inner join grommet_gifts_categories ggc
+  on ggc.id = gpc.product_category_id where ggc.sub_category = 'Beauty & Personal Care' or ggc.sub_category = 'Skincare')
+   UNION (select product_id from grommet_product_to_keyword gptk join grommet_product_keywords gpk
+    on gpk.id = gptk.keyword_id where gpk.keyword='Aromatherapy')) and is_sold_out=0;
